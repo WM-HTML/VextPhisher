@@ -34,7 +34,7 @@ banner
 echo -e "${AMARILLO}[+] Selecciona un sitio disponible:${RESET}"
 opciones=($(ls sites/))
 for i in "${!opciones[@]}"; do
-    echo -e "${ROJO}[${AZUL}$((i+1))${ROJO}]${RESET} ${opciones[$index]}"
+    echo -e "${ROJO}[${AZUL}$((i+1))${ROJO}]${RESET} ${opciones[$i]}"
 done
 
 echo -e "${NARANJA}----------------------------------------------------${RESET}"

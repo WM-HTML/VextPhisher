@@ -12,7 +12,12 @@ RESET='\033[0m'
 banner() {
     clear
     echo -e "${AZUL}====================================================${RESET}"
-    echo -e "${CIAN}          VEXTPHISHER - GESTOR AVANZADO          ${RESET}"
+    echo -e "${CIAN} __     _________  _______   ____  _   _ ___ ____  _   _ _____ ____  ${RESET}"
+    echo -e "${CIAN} \\ \\   / / ____\\ \\/ /_   _| |  _ \\| | | |_ _/ ___|| | | | ____|  _ \\ ${RESET}"
+    echo -e "${CIAN}  \\ \\ / /|  _|  \\  /  | |   | |_) | |_| || |\\___ \\| |_| |  _| | |_) |${RESET}"
+    echo -e "${CIAN}   \\ V / | |___ /  \\  | |   |  __/|  _  || | ___) |  _  | |___|  _ < ${RESET}"
+    echo -e "${CIAN}    \\_/  |_____/_/\\_\\ |_|   |_|   |_| |_|___|____/|_| |_|_____|_| \\_\\${RESET}"
+    echo -e "${VERDE}                         By Vextu Android                ${RESET}   "
     echo -e "${AZUL}====================================================${RESET}"
     echo -e "${ROJO} ADVERTENCIA: Esta herramienta es solo para fines${RESET}"
     echo -e "${ROJO} educativos y pruebas de penetración autorizadas.${RESET}"

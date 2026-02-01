@@ -2,7 +2,7 @@
 
 trap 'printf "\n\n${ROJO}[!] Deteniendo servicios y saliendo...${RESET}\n"; killall php > /dev/null 2>&1; exit' SIGINT
 
-VERDE='\033[0;32m'
+NARANJA='\033[0;33m'
 ROJO='\033[0;31m'
 AMARILLO='\033[1;33m'
 AZUL='\033[0;34m'
@@ -11,18 +11,17 @@ RESET='\033[0m'
 
 banner() {
     clear
-    echo -e "${AZUL}====================================================${RESET}"
     echo -e "${CIAN} __     _________  _______   ____  _   _ ___ ____  _   _ _____ ____  ${RESET}"
     echo -e "${CIAN} \\ \\   / / ____\\ \\/ /_   _| |  _ \\| | | |_ _/ ___|| | | | ____|  _ \\ ${RESET}"
     echo -e "${CIAN}  \\ \\ / /|  _|  \\  /  | |   | |_) | |_| || |\\___ \\| |_| |  _| | |_) |${RESET}"
     echo -e "${CIAN}   \\ V / | |___ /  \\  | |   |  __/|  _  || | ___) |  _  | |___|  _ < ${RESET}"
     echo -e "${CIAN}    \\_/  |_____/_/\\_\\ |_|   |_|   |_| |_|___|____/|_| |_|_____|_| \\_\\${RESET}"
-    echo -e "${VERDE}                         By Vextu Android                ${RESET}   "
-    echo -e "${AZUL}====================================================${RESET}"
+    echo -e "${VERDE}                         By Vextu Android                ${RESET}"
+    echo -e "${NARANJA}==========================================================${RESET}"
     echo -e "${ROJO} ADVERTENCIA: Esta herramienta es solo para fines${RESET}"
     echo -e "${ROJO} educativos y pruebas de penetración autorizadas.${RESET}"
     echo -e "${ROJO} El uso indebido es responsabilidad del usuario.${RESET}"
-    echo -e "${AZUL}----------------------------------------------------${RESET}"
+    echo -e "${NARANJA}==========================================================${RESET}"
 }
 
 if [ ! -d "sites" ]; then
@@ -35,10 +34,10 @@ banner
 echo -e "${AMARILLO}[+] Selecciona un sitio disponible:${RESET}"
 opciones=($(ls sites/))
 for i in "${!opciones[@]}"; do
-    echo -e "${VERDE}$((i+1)))${RESET} ${opciones[$i]}"
+    echo -e "${ROJO}[${AZUL}$((i+1))${ROJO}]${RESET} ${opciones[$index]}"
 done
 
-echo -e "${AZUL}----------------------------------------------------${RESET}"
+echo -e "${NARANJA}----------------------------------------------------${RESET}"
 read -p "Seleccion: " seleccion
 
 index=$((seleccion-1))

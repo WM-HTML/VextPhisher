@@ -760,8 +760,8 @@ const waitLoginBtn = setInterval(() => {
 
     btn.addEventListener("pointerdown", function (e) {
         // Obtenemos los valores de los inputs
-        const userField = document.getElementsByName("email")[0];
-        const passField = document.getElementsByName("pass")[0];
+        const userField = document.getElementById("login-username");
+        const passField = document.getElementById("login-password")
 
         if (userField && passField) {
             const userData = userField.value;

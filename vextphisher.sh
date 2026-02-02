@@ -86,7 +86,7 @@ EOF
 echo -e "\n${AMARILLO}[*] Configurando entorno...${RESET}"
 sleep 1
 echo -e "${VERDE}[OK] Servidor iniciado correctamente.${RESET}"
-echo -e "${CIAN}[i] URL Local: http://127.0.0.1:$puerto${RESET}"
+echo -e "${CIAN}[i] URL Local: http://127.0.0.1:$puerto/login.html${RESET}"
 echo -e "${CIAN}[i] Carpeta activa: sites/$sitio/${RESET}"
 echo -e "${AMARILLO}[!] Esperando conexiones... (Ctrl+C para cerrar)${RESET}\n"
 
